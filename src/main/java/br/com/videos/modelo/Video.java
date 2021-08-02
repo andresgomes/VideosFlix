@@ -4,11 +4,7 @@ import br.com.videos.dto.CategoriaDto;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 public class Video {
@@ -19,8 +15,7 @@ public class Video {
 	private String titulo;
 	private String descricao;
 	private String url;
-	
-	@OneToMany
+	@ManyToMany
 	private List<Categoria> listaCategoria;
 	
 	public Video() {

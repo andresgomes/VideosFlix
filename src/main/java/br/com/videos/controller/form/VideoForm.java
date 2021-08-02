@@ -37,6 +37,9 @@ public class VideoForm {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+	public List<Categoria> getListaCategoria(){
+		return listaCategoria;
+	}
 	public Video converter(VideoRepository videoRepository) {
 		return new Video(titulo, descricao, url, listaCategoria);
 	}

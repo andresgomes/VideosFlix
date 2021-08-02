@@ -58,9 +58,12 @@ public class VideosController {
 	//Cadastrar um novo video
 	@PostMapping
 	@Transactional
-	public ResponseEntity<VideoDto> cadastrar(@RequestBody @Valid VideoForm videoForm, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<VideoDto> cadastrar(@RequestBody VideoForm videoForm, UriComponentsBuilder uriBuilder) {
+		System.out.println("Iniciando adição");
 		Video video = videoForm.converter(videoRepository);
+		System.out.println(video.getListaCategoria() + "Objeto video convertido");
 		videoRepository.save(video);
+		System.out.println("Objeto video salvo");
 		
 		URI uri = uriBuilder.path("/videos/{id}").buildAndExpand(video.getId()).toUri();
 		return ResponseEntity.created(uri).body(new VideoDto(video));

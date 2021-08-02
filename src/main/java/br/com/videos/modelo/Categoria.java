@@ -12,6 +12,7 @@ public class Categoria {
 	@Enumerated
 	private CategoriaCores cor;
 
+
 	public CategoriaCores getCor() {
 		return cor;
 	}
