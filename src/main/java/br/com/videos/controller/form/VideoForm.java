@@ -24,7 +24,6 @@ public class VideoForm {
 	private String url;
 
 	@NotNull @NotEmpty
-	@OneToMany
 	private List<Category> listCategory;
 	
 	

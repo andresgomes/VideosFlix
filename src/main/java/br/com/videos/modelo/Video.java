@@ -13,7 +13,7 @@ public class Video {
 	private String title;
 	private String description;
 	private String url;
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.REMOVE)
 	private List<Category> listCategory;
 	
 	public Video() {
