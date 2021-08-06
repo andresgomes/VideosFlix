@@ -4,7 +4,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import br.com.videos.modelo.Categoria;
+import br.com.videos.modelo.Category;
 import org.hibernate.validator.constraints.Length;
 
 import br.com.videos.modelo.Video;
@@ -15,33 +15,34 @@ import java.util.List;
 public class VideoForm {
 	
 	@NotNull @NotEmpty @Length(min = 4, max = 30)
-	private String titulo;
+	private String title;
 	
 	@NotNull @NotEmpty
-	private String descricao;
+	private String description;
 	
 	@NotNull @NotEmpty
 	private String url;
 
 	@NotNull @NotEmpty
 	@OneToMany
-	private List<Categoria> listaCategoria;
+	private List<Category> listCategory;
 	
 	
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public List<Categoria> getListaCategoria(){
-		return listaCategoria;
+	public List<Category> getListCategory(){
+		return listCategory;
 	}
+
 	public Video converter(VideoRepository videoRepository) {
-		return new Video(titulo, descricao, url, listaCategoria);
+		return new Video(title, description, url, listCategory);
 	}
 
 

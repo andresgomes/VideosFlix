@@ -11,29 +11,29 @@ import br.com.videos.repository.VideoRepository;
 public class AtualizacaoDeVideoForm {
 
 	@NotNull @NotEmpty @Length(min = 4, max = 30)
-	private String titulo;
+	private String title;
 	
 	@NotNull @NotEmpty
-	private String descricao;
+	private String description;
 	
 	@NotNull @NotEmpty
 	private String url;
 	
 	
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public void setUrl(String url) {
 		this.url = url;
 	}
 	
-	public Video atualizar(Long id, VideoRepository videoRepository) {
+	public Video update(Long id, VideoRepository videoRepository) {
 		Video video = videoRepository.getById(id);
-		video.setTitulo(this.titulo);
-		video.setDescricao(this.descricao);
+		video.setTitle(this.title);
+		video.setDescription(this.description);
 		
 		return video;
 	}

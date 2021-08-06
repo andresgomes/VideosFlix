@@ -1,6 +1,6 @@
 package br.com.videos.modelo;
 
-public enum CategoriaCores {
+public enum CategoryColors {
 	BLACK,
 	GRAY,
 	SILVER,

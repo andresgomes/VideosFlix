@@ -34,13 +34,13 @@ public class VideosController {
 	
 	//Listar todos os videos ou 1 pelo nome
 	@GetMapping
-	public List<VideoDto> listar (String tituloVideo){
+	public List<VideoDto> read (String tituloVideo){
 		if(tituloVideo == null) {
 			List<Video> videos = videoRepository.findAll();
 			return VideoDto.converter(videos);
 		}
 		
-		List<Video> videos = videoRepository.findByTitulo(tituloVideo);
+		List<Video> videos = videoRepository.findByTitle(tituloVideo);
 		return VideoDto.converter(videos);
 	}
 	
@@ -58,13 +58,10 @@ public class VideosController {
 	//Cadastrar um novo video
 	@PostMapping
 	@Transactional
-	public ResponseEntity<VideoDto> cadastrar(@RequestBody VideoForm videoForm, UriComponentsBuilder uriBuilder) {
-		System.out.println("Iniciando adição");
+	public ResponseEntity<VideoDto> insert(@RequestBody @Valid VideoForm videoForm, UriComponentsBuilder uriBuilder) {
 		Video video = videoForm.converter(videoRepository);
-		System.out.println(video.getListaCategoria() + "Objeto video convertido");
 		videoRepository.save(video);
-		System.out.println("Objeto video salvo");
-		
+
 		URI uri = uriBuilder.path("/videos/{id}").buildAndExpand(video.getId()).toUri();
 		return ResponseEntity.created(uri).body(new VideoDto(video));
 
@@ -73,10 +70,10 @@ public class VideosController {
 	//Atualizar video existe
 	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<VideoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoDeVideoForm videoForm) {
+	public ResponseEntity<VideoDto> update(@PathVariable Long id, @RequestBody @Valid AtualizacaoDeVideoForm videoForm) {
 		Optional<Video> optional = videoRepository.findById(id);
 		if (optional.isPresent()) {
-			Video video = videoForm.atualizar(id, videoRepository);
+			Video video = videoForm.update(id, videoRepository);
 			return ResponseEntity.ok(new VideoDto(video));
 		}
 		
@@ -87,7 +84,7 @@ public class VideosController {
 	//Apagar video
 	@DeleteMapping("/{id}")
 	@Transactional
-	public ResponseEntity<?> remover (@PathVariable Long id){
+	public ResponseEntity<?> delete(@PathVariable Long id){
 		Optional<Video> optional = videoRepository.findById(id);
 		if(optional.isPresent()) {
 			videoRepository.deleteById(id);

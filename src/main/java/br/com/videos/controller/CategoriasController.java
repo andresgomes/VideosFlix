@@ -1,8 +1,8 @@
 package br.com.videos.controller;
 
 
-import br.com.videos.dto.CategoriaDto;
-import br.com.videos.modelo.Categoria;
+import br.com.videos.dto.CategoryDto;
+import br.com.videos.modelo.Category;
 import br.com.videos.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,17 +22,17 @@ public class CategoriasController {
 
     //listar todas as categorias
     @GetMapping
-    public List<CategoriaDto> listar (){
-        List<Categoria> categorias = categoriaRepository.findAll();
-        return CategoriaDto.converter(categorias);
+    public List<CategoryDto> read(){
+        List<Category> categories = categoriaRepository.findAll();
+        return CategoryDto.converter(categories);
     }
 
     //Busca categoria pelo id
     @GetMapping("/{id}")
-    public ResponseEntity<CategoriaDto> buscar (@PathVariable Long id){
-        Optional<Categoria> optional = categoriaRepository.findById(id);
+    public ResponseEntity<CategoryDto> search(@PathVariable Long id){
+        Optional<Category> optional = categoriaRepository.findById(id);
         if (optional.isPresent()){
-            return ResponseEntity.ok(new CategoriaDto(optional.get()));
+            return ResponseEntity.ok(new CategoryDto(optional.get()));
         }
 
         return ResponseEntity.notFound().build();
@@ -40,9 +40,9 @@ public class CategoriasController {
 
     @PostMapping
     @Transactional
-    public  ResponseEntity<Categoria> insert (@RequestBody @Valid Categoria categoria){
+    public  ResponseEntity<Category> insert (@RequestBody @Valid Category category){
 
-        return ResponseEntity.ok(categoriaRepository.save(categoria));
+        return ResponseEntity.ok(categoriaRepository.save(category));
 
     }
 

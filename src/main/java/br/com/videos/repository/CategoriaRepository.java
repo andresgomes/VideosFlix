@@ -1,9 +1,8 @@
 package br.com.videos.repository;
 
-import br.com.videos.modelo.Categoria;
-import br.com.videos.modelo.Video;
+import br.com.videos.modelo.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
+public interface CategoriaRepository extends JpaRepository<Category, Long> {
 
 }

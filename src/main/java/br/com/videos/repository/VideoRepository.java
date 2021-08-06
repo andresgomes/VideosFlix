@@ -9,6 +9,6 @@ import br.com.videos.modelo.Video;
 
 public interface VideoRepository extends JpaRepository<Video, Long>{
 	
-	List<Video> findByTitulo(String tituloVideo);
+	List<Video> findByTitle(String tituloVideo);
 
 }

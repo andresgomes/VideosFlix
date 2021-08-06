@@ -1,7 +1,5 @@
 package br.com.videos.modelo;
 
-import br.com.videos.dto.CategoriaDto;
-
 import java.util.List;
 
 import javax.persistence.*;
@@ -12,21 +10,21 @@ public class Video {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String titulo;
-	private String descricao;
+	private String title;
+	private String description;
 	private String url;
 	@ManyToMany
-	private List<Categoria> listaCategoria;
+	private List<Category> listCategory;
 	
 	public Video() {
 	}
 
 
-	public Video(String titulo, String descricao, String url, List<Categoria> listaCategoria) {
-		this.titulo = titulo;
-		this.descricao = descricao;
+	public Video(String title, String description, String url, List<Category> listCategory) {
+		this.title = title;
+		this.description = description;
 		this.url = url;
-		this.listaCategoria = listaCategoria;
+		this.listCategory = listCategory;
 	}
 
 
@@ -36,17 +34,17 @@ public class Video {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getTitulo() {
-		return titulo;
+	public String getTitle() {
+		return title;
 	}
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getDescricao() {
-		return descricao;
+	public String getDescription() {
+		return description;
 	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public String getUrl() {
 		return url;
@@ -56,13 +54,13 @@ public class Video {
 	}
 
 
-	public List<Categoria> getListaCategoria() {
-		return listaCategoria;
+	public List<Category> getListCategory() {
+		return listCategory;
 	}
 
 
-	public void setListaCategoria(List<Categoria> listaCategoria) {
-		this.listaCategoria = listaCategoria;
+	public void setListCategory(List<Category> listaCategory) {
+		this.listCategory = listaCategory;
 	}
 
 
