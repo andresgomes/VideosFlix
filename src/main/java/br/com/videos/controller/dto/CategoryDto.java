@@ -1,4 +1,4 @@
-package br.com.videos.dto;
+package br.com.videos.controller.dto;
 
 import br.com.videos.modelo.Category;
 import br.com.videos.modelo.CategoryColors;

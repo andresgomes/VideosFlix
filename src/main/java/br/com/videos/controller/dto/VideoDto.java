@@ -1,10 +1,11 @@
-package br.com.videos.dto;
-
-import java.util.List;
-import java.util.stream.Collectors;
+package br.com.videos.controller.dto;
 
 import br.com.videos.modelo.Category;
 import br.com.videos.modelo.Video;
+import org.springframework.data.domain.Page;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class VideoDto {
 	
@@ -21,6 +22,8 @@ public class VideoDto {
 		this.url = video.getUrl();
 		this.listCategory = video.getListCategory();
 	}
+
+
 
 	public List<Category> getListaCategoria() {
 		return listCategory;
@@ -51,7 +54,10 @@ public class VideoDto {
 	public static List<VideoDto> converter(List<Video> videos) {
 		return videos.stream().map(VideoDto::new).collect(Collectors.toList());
 	}
-	
+
+	public static Page<VideoDto> converterPageble(Page<Video> videos) {
+		return videos.map(VideoDto::new);
+	}
 
 	
 	

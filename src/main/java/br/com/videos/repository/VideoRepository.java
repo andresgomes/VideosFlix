@@ -1,14 +1,15 @@
 package br.com.videos.repository;
 
-import java.util.List;
-
+import br.com.videos.modelo.Video;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.videos.modelo.Video;
+import java.util.List;
 
 
 public interface VideoRepository extends JpaRepository<Video, Long>{
 	
 	List<Video> findByTitle(String tituloVideo);
+
+	List<Video> findByListCategoryId(Long categoryId);
 
 }
