@@ -1,6 +1,7 @@
 FROM adoptopenjdk/openjdk14
 RUN addgroup -system spring && adduser spring -ingroup spring
 USER spring:spring
+CMD mvn clean package dockerfile:build
 ARG JAR_FILE=target/*.jar
-COPY target/videosFlix.jar app.jar
+COPY ${JAR_FILE} app.jar
 ENTRYPOINT ["java","-Xmx512m","-jar","/app.jar"]
