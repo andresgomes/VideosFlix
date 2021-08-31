@@ -4,4 +4,4 @@ USER spring:spring
 CMD mvn clean install
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} videosFlix.jar
-ENTRYPOINT ["java","-Xmx512m","-jar","/videosFlix.jar"]
+CMD ["java","-Xmx512m","-jar","/videosFlix.jar"]
