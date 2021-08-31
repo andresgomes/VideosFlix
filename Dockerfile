@@ -1,5 +1,5 @@
-FROM openjdk:8-jdk-alpine
-RUN addgroup -S spring && adduser -S spring -G spring
+FROM adoptopenjdk/openjdk14
+RUN addgroup -system spring && adduser spring -ingroup spring
 USER spring:spring
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} app.jar
