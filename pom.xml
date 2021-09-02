@@ -16,7 +16,7 @@
     <description>Projeto de videos com Rest</description>
     <properties>
         <java.version>14</java.version>
-        <start-class>com.baeldung.VideosApplication</start-class>
+        <start-class>br.com.videos.VideosApplication</start-class>
     </properties>
     <dependencies>
         <dependency>
