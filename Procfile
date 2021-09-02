@@ -1,1 +1,1 @@
-web: java -cp target/classes/;target/dependency/* br.com.videos.VideosApplication
+web: java $JAVA_OPTS -Dserver.port=$PORT $JAVA_OPTS -jar target/*.jar
