@@ -5,10 +5,10 @@ import br.com.videos.modelo.Video;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class VideoDto {
-	
+
+	private Long id;
 	private String title;
 	private String description;
 	private String url;
@@ -17,6 +17,7 @@ public class VideoDto {
 	
 	
 	public VideoDto(Video video) {
+		this.id = video.getId();
 		this.title = video.getTitle();
 		this.description = video.getDescription();
 		this.url = video.getUrl();
@@ -25,34 +26,32 @@ public class VideoDto {
 
 
 
-	public List<Category> getListaCategoria() {
+	public List<Category> getListCategoria() {
 		return listCategory;
 	}
 
-	public void setListaCategoria(List<Category> listaCategory) {
-		this.listCategory = listaCategory;
+	public void setListCategory(List<Category> listCategory) {
+		this.listCategory = listCategory;
 	}
 
 	public String getTitle() {
 		return title;
 	}
 
-
-
 	public String getDescription() {
 		return description;
 	}
-
-
 
 	public String getUrl() {
 		return url;
 	}
 
+	public Long getId() {
+		return id;
+	}
 
-
-	public static List<VideoDto> converter(List<Video> videos) {
-		return videos.stream().map(VideoDto::new).collect(Collectors.toList());
+	public static Page<VideoDto> converter(Page<Video> videos) {
+		return videos.map(VideoDto::new);
 	}
 
 	public static Page<VideoDto> converterPageble(Page<Video> videos) {

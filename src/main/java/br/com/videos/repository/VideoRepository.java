@@ -1,15 +1,15 @@
 package br.com.videos.repository;
 
 import br.com.videos.modelo.Video;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
 
 
 public interface VideoRepository extends JpaRepository<Video, Long>{
 	
-	List<Video> findByTitle(String tituloVideo);
+	Page<Video> findByTitle(String tituloVideo, Pageable pageable);
 
-	List<Video> findByListCategoryId(Long categoryId);
+	Page<Video> findByListCategoryId(Long categoryId, Pageable pageable);
 
 }

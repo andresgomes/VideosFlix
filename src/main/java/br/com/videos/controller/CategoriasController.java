@@ -8,6 +8,9 @@ import br.com.videos.modelo.Video;
 import br.com.videos.repository.CategoryRepository;
 import br.com.videos.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,13 +49,13 @@ public class CategoriasController {
 
     //Busca videos pela categoria
     @GetMapping("/{id}/videos")
-    public ResponseEntity<List<VideoDto>> searchVideosByCategory(@PathVariable Long id){
+    public ResponseEntity<Page<VideoDto>> searchVideosByCategory(@PathVariable Long id){
         Optional<Category> category = categoryRepository.findById(id);
         if (category.isPresent()){
+            Pageable pageable = PageRequest.of(1,5);
+            Page<Video> videos = videoRepository.findByListCategoryId(id,pageable);
 
-            List<Video> videos = videoRepository.findByListCategoryId(id);
-
-            return ResponseEntity.ok(VideoDto.converter(videos));
+            return ResponseEntity.ok(VideoDto.converterPageble(videos));
         }
 
         return ResponseEntity.notFound().build();

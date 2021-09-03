@@ -1,16 +1,17 @@
 package br.com.videos.controller;
 
+import br.com.videos.controller.dto.VideoDto;
 import br.com.videos.controller.form.AtualizacaoDeVideoForm;
 import br.com.videos.controller.form.VideoForm;
-import br.com.videos.controller.dto.VideoDto;
 import br.com.videos.modelo.Video;
 import br.com.videos.repository.CategoryRepository;
 import br.com.videos.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -18,7 +19,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -33,19 +33,23 @@ public class VideosController {
 	
 	//Listar todos os videos ou 1 pelo nome
 	@GetMapping
-	public List<VideoDto> read (String tituloVideo){
+	public Page<VideoDto> read (@RequestParam(required = false) String tituloVideo,
+								@PageableDefault(sort = "id", direction = Direction.ASC, page = 0, size = 10) Pageable pageable){
+
 		if(tituloVideo == null) {
-			List<Video> videos = videoRepository.findAll();
+			Page<Video> videos = videoRepository.findAll(pageable);
 			return VideoDto.converter(videos);
 		}
 		
-		List<Video> videos = videoRepository.findByTitle(tituloVideo);
+		Page<Video> videos = videoRepository.findByTitle(tituloVideo, pageable);
 		return VideoDto.converter(videos);
 	}
 
 	//Listar 5 videos sem estar "logago"
 	@GetMapping("/free")
-	public Page<VideoDto> readFree (@PageableDefault(sort = "id", direction = Direction.ASC, size = 5) Pageable pageable){
+	public Page<VideoDto> read5Free (){
+		Pageable pageable = PageRequest.of(0, 5);
+
 		Page<Video> videos = videoRepository.findAll(pageable);
 
 		return VideoDto.converterPageble(videos);
