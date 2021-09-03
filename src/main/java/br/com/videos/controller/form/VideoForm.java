@@ -1,15 +1,12 @@
 package br.com.videos.controller.form;
 
-import javax.persistence.OneToMany;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 import br.com.videos.modelo.Category;
-import org.hibernate.validator.constraints.Length;
-
 import br.com.videos.modelo.Video;
 import br.com.videos.repository.VideoRepository;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class VideoForm {
@@ -36,7 +33,12 @@ public class VideoForm {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public List<Category> getListCategory(){
+
+	public void setListCategory(List<Category> listCategory) {
+		this.listCategory = listCategory;
+	}
+
+	public List<Category> getListCategory() {
 		return listCategory;
 	}
 

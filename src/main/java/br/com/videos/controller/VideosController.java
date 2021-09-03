@@ -4,6 +4,7 @@ import br.com.videos.controller.form.AtualizacaoDeVideoForm;
 import br.com.videos.controller.form.VideoForm;
 import br.com.videos.controller.dto.VideoDto;
 import br.com.videos.modelo.Video;
+import br.com.videos.repository.CategoryRepository;
 import br.com.videos.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,9 @@ public class VideosController {
 	
 	@Autowired
 	private VideoRepository videoRepository;
+
+	@Autowired
+	private CategoryRepository categoryRepository;
 	
 	//Listar todos os videos ou 1 pelo nome
 	@GetMapping
